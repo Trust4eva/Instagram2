@@ -30,6 +30,12 @@
     
 }
 
++(void)addUserProfilePic:(UIImage * _Nullable)profilePic {
+    Post *newPost = [Post new];
+    newPost.profilepic = [self getPFFileFromImage:profilePic];
+    [newPost saveInBackground];
+}
+
 
 
 + (PFFile *)getPFFileFromImage: (UIImage * _Nullable)image {

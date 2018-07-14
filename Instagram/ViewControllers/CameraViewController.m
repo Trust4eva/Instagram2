@@ -24,6 +24,7 @@
     
 }
 
+
 - (IBAction)tappedImage:(id)sender {
      [self TakingAPhoto];
 }

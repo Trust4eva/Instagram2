@@ -10,6 +10,7 @@
 #import "Parse/Parse.h"
 #import "Post.h"
 
+
 @interface SignUpViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;

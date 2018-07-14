@@ -25,6 +25,7 @@
 
 + (PFFile *_Nonnull)getPFFileFromImage: (UIImage * _Nullable)image;
 
++(void)addUserProfilePic:(UIImage *_Nullable)profilePic;
 
 
 

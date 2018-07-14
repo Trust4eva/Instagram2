@@ -18,7 +18,7 @@
 @interface HomeViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *CameraButton;
-@property(strong,nonatomic) NSArray *imagesArrary;
+@property(strong,nonatomic) NSMutableArray *imagesArrary;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
@@ -66,19 +66,36 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
             // do something with the array of object returned by the call
-            self.imagesArrary = posts;
+            self.imagesArrary = [[NSMutableArray alloc]initWithArray:posts];
             [self.myTableView reloadData];
             [self.refreshControl endRefreshing];
             
-        
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
     }];
-    
-    
 }
 
+//Infinite scrolling
+-(void)loadmorePost{
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
+    query.skip = self.imagesArrary.count;
+    query.limit = 20;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            // do something with the array of object returned by the call
+            self.imagesArrary = [[NSMutableArray alloc]initWithArray:posts];
+            [self.myTableView reloadData];
+            [self.refreshControl endRefreshing];
+            
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
 
 
 #pragma mark - Navigation

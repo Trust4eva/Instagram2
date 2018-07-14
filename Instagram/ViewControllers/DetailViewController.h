@@ -12,6 +12,6 @@
 
 @interface DetailViewController : UIViewController
 @property (strong,nonatomic) Post *post;
-@property (strong,nonatomic) LoginViewController *LVC;
+
 
 @end
